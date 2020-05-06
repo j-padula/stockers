@@ -1,8 +1,8 @@
-package com.stockers.stockers.user.controller;
+package com.stockers.stockers.article.controller;
 
-import com.stockers.stockers.user.domain.Article;
-import com.stockers.stockers.user.dto.ArticleDto;
-import com.stockers.stockers.user.service.ArticleService;
+import com.stockers.stockers.article.domain.Article;
+import com.stockers.stockers.article.dto.ArticleDto;
+import com.stockers.stockers.article.service.ArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

@@ -1,8 +1,8 @@
-package com.stockers.stockers.user.service.impl;
+package com.stockers.stockers.article.service.impl;
 
-import com.stockers.stockers.user.domain.Article;
-import com.stockers.stockers.user.repository.ArticleRepository;
-import com.stockers.stockers.user.service.ArticleService;
+import com.stockers.stockers.article.domain.Article;
+import com.stockers.stockers.article.repository.ArticleRepository;
+import com.stockers.stockers.article.service.ArticleService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,7 +44,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional
     @Override
     public Article findById(Integer articleId) {
-        return this.articleRepository.findById(articleId);
+        return this.articleRepository.findByArticleId(articleId);
 
     }
     @Transactional

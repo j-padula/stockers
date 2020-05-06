@@ -1,8 +1,8 @@
-package com.stockers.stockers.user.controller;
+package com.stockers.stockers.client.controller;
 
-import com.stockers.stockers.user.domain.Client;
-import com.stockers.stockers.user.dto.ClientDto;
-import com.stockers.stockers.user.service.ClientService;
+import com.stockers.stockers.client.domain.Client;
+import com.stockers.stockers.client.dto.ClientDto;
+import com.stockers.stockers.client.service.ClientService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +49,6 @@ public class ClientController {
         client.setContactName(clientDto.getContactName());
         client.setEmail(clientDto.getEmail());
         client.setCountry(clientDto.getCountry());
-        client.setClients(clientDto.getClients());
         return ResponseEntity.ok((clientService.create(client)));
     }
     @PutMapping(path = "/{clientId}")
@@ -65,7 +64,6 @@ public class ClientController {
         client.setContactName(clientDto.getContactName());
         client.setEmail(clientDto.getEmail());
         client.setCountry(clientDto.getCountry());
-        client.setClients(clientDto.getClients());
         return ResponseEntity.ok((clientService.update(client)));
 
     }

@@ -17,9 +17,9 @@ import java.util.List;
 @RequestMapping("/api/users")
 @Api(tags = "users")
 public class UserController {
+
     private UserService userService;
     private User user;
-
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -29,8 +29,8 @@ public class UserController {
     @ApiOperation(value = "Listado de usuarios", notes = "Devuelve un listado de usuarios")
     public ResponseEntity<List<User>> users(){
         return ResponseEntity.ok(userService.findAll());
-
     }
+
     @GetMapping(path = "/{userId}")
     @ApiOperation(value = "Busca un usuario", notes = "Devuelve un usuario segun ID")
     public ResponseEntity<User> getUser(@PathVariable Integer userId){

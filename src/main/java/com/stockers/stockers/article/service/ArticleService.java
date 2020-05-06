@@ -1,8 +1,8 @@
-package com.stockers.stockers.user.service;
+package com.stockers.stockers.article.service;
 
 //Clase para definir los servicios de articulos
 
-import com.stockers.stockers.user.domain.Article;
+import com.stockers.stockers.article.domain.Article;
 
 import java.util.List;
 

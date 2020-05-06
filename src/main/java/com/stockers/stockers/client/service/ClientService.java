@@ -1,9 +1,8 @@
-package com.stockers.stockers.user.service;
+package com.stockers.stockers.client.service;
 
 //Definicion de los servicios de cliente
 
-import com.stockers.stockers.user.domain.Client;
-import com.stockers.stockers.user.repository.ClientRepository;
+import com.stockers.stockers.client.domain.Client;
 
 import java.util.List;
 

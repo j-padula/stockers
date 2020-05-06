@@ -1,4 +1,4 @@
-package com.stockers.stockers.user.dto;
+package com.stockers.stockers.client.dto;
 
 import lombok.Data;
 
@@ -16,5 +16,5 @@ public class ClientDto {
     private String contactName;
     private String email;
     private String country;
-    public ArrayList<String> clients;
+
 }

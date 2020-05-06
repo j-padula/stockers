@@ -1,4 +1,4 @@
-package com.stockers.stockers.user.dto;
+package com.stockers.stockers.article.dto;
 
 import lombok.Data;
 

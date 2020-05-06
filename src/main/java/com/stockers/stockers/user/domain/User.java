@@ -1,14 +1,15 @@
 package com.stockers.stockers.user.domain;
 
+import com.stockers.stockers.purchase.domain.Purchase;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Set;
 
 @Data
 @Entity
 @Table(name = "User")
-@NamedQuery(name = "User.findById", query = "Select u from User u where u.userId=?1")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +21,13 @@ public class User {
     private String username;
     private String password;
     private ArrayList<String> roles;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Purchase> purchase;
+    public User(){
+
+    }
+
+
 
 }

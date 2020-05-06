@@ -1,14 +1,14 @@
-package com.stockers.stockers.user.domain;
+package com.stockers.stockers.client.domain;
 
+import com.stockers.stockers.purchase.domain.Purchase;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.Set;
 
 @Data
 @Entity
 @Table(name = "Client")
-@NamedQuery(name = "Client.findById", query = "Select c from Client c where c.clientId=?1")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,12 @@ public class Client {
     private String contactName;
     private String email;
     private String country;
-    private ArrayList<String> clients;
 
+    @OneToMany(mappedBy = "client")
+    private Set<Purchase> purchase;
+
+    public Client(){
+
+    }
 
 }

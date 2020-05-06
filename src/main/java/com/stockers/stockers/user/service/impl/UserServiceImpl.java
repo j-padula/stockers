@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public User findById(Integer userId) {
-        return this.userRepository.findById(userId);
+        return this.userRepository.findByUserId(userId);
 
     }
 

@@ -1,8 +1,8 @@
-package com.stockers.stockers.user.service.impl;
+package com.stockers.stockers.client.service.impl;
 
-import com.stockers.stockers.user.domain.Client;
-import com.stockers.stockers.user.repository.ClientRepository;
-import com.stockers.stockers.user.service.ClientService;
+import com.stockers.stockers.client.domain.Client;
+import com.stockers.stockers.client.repository.ClientRepository;
+import com.stockers.stockers.client.service.ClientService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,7 +45,7 @@ public class ClientServiceImpl implements ClientService {
     @Transactional
     @Override
     public Client findById(Integer clientId) {
-        return this.clientRepository.findById(clientId);
+        return this.clientRepository.findByClientId(clientId);
 
     }
     @Transactional

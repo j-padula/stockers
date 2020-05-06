@@ -1,14 +1,17 @@
-package com.stockers.stockers.user.domain;
+package com.stockers.stockers.article.domain;
 
+import com.stockers.stockers.purchase.domain.Purchase;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
 @Table(name = "Article")
-@NamedQuery(name = "Article.findById", query = "Select a from Article a where a.articleId=?1")
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,5 +28,14 @@ public class Article {
     private String description;
     private Double price;
     private ArrayList<String> articles;
+
+    @ManyToMany(mappedBy = "articles")
+    private List<Purchase> purchase;
+
+    public Article(){
+
+    }
+
+
 
 }
