@@ -3,6 +3,7 @@ package com.stockers.stockers.user.service;
 //Definicion de los servicios de usuario
 
 import com.stockers.stockers.user.domain.User;
+import com.stockers.stockers.user.dto.UserDto;
 
 import java.util.List;
 

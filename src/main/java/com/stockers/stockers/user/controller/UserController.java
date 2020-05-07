@@ -33,8 +33,16 @@ public class UserController {
 
     @GetMapping(path = "/{userId}")
     @ApiOperation(value = "Busca un usuario", notes = "Devuelve un usuario segun ID")
-    public ResponseEntity<User> getUser(@PathVariable Integer userId){
-        return ResponseEntity.ok(userService.findById(userId));
+    public ResponseEntity<UserDto> getUser(@PathVariable Integer userId){
+        User user = userService.findById(userId);
+        UserDto userDto = new UserDto();
+        userDto.setUserId(user.getUserId());
+        userDto.setName(user.getName());
+        userDto.setEmail(user.getEmail());
+        userDto.setUsername(user.getUsername());
+        userDto.setRoles(user.getRoles());
+        return ResponseEntity.ok(userDto);
+
     }
 
     @PostMapping()

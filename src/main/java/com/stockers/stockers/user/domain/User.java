@@ -1,5 +1,6 @@
 package com.stockers.stockers.user.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.stockers.stockers.purchase.domain.Purchase;
 import lombok.Data;
 
@@ -21,6 +22,7 @@ public class User {
     private String username;
     private String password;
     private ArrayList<String> roles;
+
 
     @OneToMany(mappedBy = "user")
     private Set<Purchase> purchase;
