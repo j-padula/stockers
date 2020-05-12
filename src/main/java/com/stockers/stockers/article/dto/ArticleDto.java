@@ -17,6 +17,5 @@ public class ArticleDto {
     private String manufacturingDate;
     private String description;
     private Double price;
-    private ArrayList<String> articles;
 
 }

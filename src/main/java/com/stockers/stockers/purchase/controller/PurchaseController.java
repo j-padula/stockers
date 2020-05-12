@@ -46,10 +46,9 @@ public class PurchaseController {
     }
 
     @PostMapping()
-    @ApiOperation(value = "Crea un pedido", notes = "Crea un pedidoy lo devuelve")
+    @ApiOperation(value = "Crea un pedido", notes = "Crea un pedido y lo devuelve")
     public ResponseEntity<Purchase>  createPurchase(@RequestBody @Valid PurchaseDto purchaseDto){
         Purchase purchase = new Purchase();
-     //   Client client = this.clientService.findById(purchaseDto.getClient());
         Client client = new Client();
         client.setClientId(purchaseDto.getClient().getClientId());
 

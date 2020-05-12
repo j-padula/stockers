@@ -24,8 +24,7 @@ public class User {
     private ArrayList<String> roles;
 
 
-    @OneToMany(mappedBy = "user")
-    private Set<Purchase> purchase;
+
     public User(){
 
     }

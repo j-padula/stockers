@@ -17,7 +17,7 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
 
-    private Integer articleId = null;
+    private Integer articleId;
     private String name;
     private String artCode;
     private String model;
@@ -27,10 +27,8 @@ public class Article {
     private String manufacturingDate;
     private String description;
     private Double price;
-    private ArrayList<String> articles;
 
-    @ManyToMany(mappedBy = "articles")
-    private List<Purchase> purchase;
+
 
     public Article(){
 

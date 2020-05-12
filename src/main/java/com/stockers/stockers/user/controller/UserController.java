@@ -2,6 +2,7 @@ package com.stockers.stockers.user.controller;
 
 import com.stockers.stockers.user.domain.User;
 import com.stockers.stockers.user.dto.UserDto;
+import com.stockers.stockers.user.mapper.UserMapper;
 import com.stockers.stockers.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,37 +36,20 @@ public class UserController {
     @ApiOperation(value = "Busca un usuario", notes = "Devuelve un usuario segun ID")
     public ResponseEntity<UserDto> getUser(@PathVariable Integer userId){
         User user = userService.findById(userId);
-        UserDto userDto = new UserDto();
-        userDto.setUserId(user.getUserId());
-        userDto.setName(user.getName());
-        userDto.setEmail(user.getEmail());
-        userDto.setUsername(user.getUsername());
-        userDto.setRoles(user.getRoles());
+        UserDto userDto = UserMapper.modelToDto(user);
         return ResponseEntity.ok(userDto);
-
     }
 
     @PostMapping()
     @ApiOperation(value = "Crea un usuario", notes = "Crea un usuario y lo devuelve")
     public ResponseEntity<User> createUser(@RequestBody @Valid UserDto userDto){
-        User user = new User();
-        user.setName(userDto.getName());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
-        user.setUsername(userDto.getUsername());
-        user.setRoles(userDto.getRoles());
+        User user = UserMapper.dtoToUser(userDto);
         return ResponseEntity.ok((userService.create(user)));
     }
     @PutMapping(path = "/{userId}")
     @ApiOperation(value = "Actualiza un usuario", notes = "Actualiza un usuario y lo devuelve")
     public ResponseEntity<User> updateUser(@PathVariable Integer userId, @RequestBody @Valid UserDto userDto){
-        User user = new User();
-        user.setUserId(userId);
-        user.setName(userDto.getName());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
-        user.setUsername(userDto.getUsername());
-        user.setRoles(userDto.getRoles());
+        User user = UserMapper.dtoToUser(userDto);
         return ResponseEntity.ok((userService.update(user)));
     }
 

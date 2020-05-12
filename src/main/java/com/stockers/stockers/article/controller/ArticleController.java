@@ -49,7 +49,6 @@ public class ArticleController {
         article.setQuantity(articleDto.getQuantity());
         article.setManufacturingDate(articleDto.getManufacturingDate());
         article.setDescription(articleDto.getDescription());
-        article.setArticles(articleDto.getArticles());
         article.setPrice(articleDto.getPrice());
         return ResponseEntity.ok(articleService.create(article));
     }
@@ -66,7 +65,6 @@ public class ArticleController {
         article.setQuantity(articleDto.getQuantity());
         article.setManufacturingDate(articleDto.getManufacturingDate());
         article.setDescription(articleDto.getDescription());
-        article.setArticles(articleDto.getArticles());
         article.setPrice(articleDto.getPrice());
         return ResponseEntity.ok((articleService.update(article)));
 

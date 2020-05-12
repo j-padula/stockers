@@ -24,8 +24,7 @@ public class Client {
     private String email;
     private String country;
 
-    @OneToMany(mappedBy = "client")
-    private Set<Purchase> purchase;
+
 
     public Client(){
 
