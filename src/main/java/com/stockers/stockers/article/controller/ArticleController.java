@@ -2,6 +2,7 @@ package com.stockers.stockers.article.controller;
 
 import com.stockers.stockers.article.domain.Article;
 import com.stockers.stockers.article.dto.ArticleDto;
+import com.stockers.stockers.article.mapper.ArticleMapper;
 import com.stockers.stockers.article.service.ArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,39 +34,22 @@ public class ArticleController {
     }
     @GetMapping(path = "/{articleId}")
     @ApiOperation(value = "Busca un articulo", notes = "Devuelve un articulo según ID")
-    public ResponseEntity<Article> getArticle(@PathVariable Integer articleId){
-        return ResponseEntity.ok(articleService.findById(articleId));
+    public ResponseEntity<ArticleDto> getArticle(@PathVariable Integer articleId){
+        Article article = articleService.findById(articleId);
+        ArticleDto articleDto = ArticleMapper.modelToDto(article);
+        return ResponseEntity.ok(articleDto);
     }
 
     @PostMapping()
     @ApiOperation(value = "Crea un articulo", notes = "Crea un articulo y lo devuelve")
     public ResponseEntity<Article> createArticle(@RequestBody @Valid ArticleDto articleDto){
-        Article article = new Article();
-        article.setName(articleDto.getName());
-        article.setArtCode(articleDto.getArtCode());
-        article.setModel(articleDto.getModel());
-        article.setType(articleDto.getType());
-        article.setLocation(articleDto.getLocation());
-        article.setQuantity(articleDto.getQuantity());
-        article.setManufacturingDate(articleDto.getManufacturingDate());
-        article.setDescription(articleDto.getDescription());
-        article.setPrice(articleDto.getPrice());
+        Article article = ArticleMapper.dtoToArticle(articleDto);
         return ResponseEntity.ok(articleService.create(article));
     }
     @PutMapping(path = "/{articleId}")
     @ApiOperation(value = "Actualiza un articulo", notes = "Actualiza un articulo y lo devuelve")
     public ResponseEntity<Article> updateArticle(@PathVariable Integer articleId, @RequestBody @Valid ArticleDto articleDto){
-        Article article = new Article();
-        article.setArticleId(articleDto.getArticleId());
-        article.setName(articleDto.getName());
-        article.setArtCode(articleDto.getArtCode());
-        article.setModel(articleDto.getModel());
-        article.setType(articleDto.getType());
-        article.setLocation(articleDto.getLocation());
-        article.setQuantity(articleDto.getQuantity());
-        article.setManufacturingDate(articleDto.getManufacturingDate());
-        article.setDescription(articleDto.getDescription());
-        article.setPrice(articleDto.getPrice());
+        Article article = ArticleMapper.dtoToArticle(articleDto);
         return ResponseEntity.ok((articleService.update(article)));
 
     }

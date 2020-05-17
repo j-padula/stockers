@@ -2,6 +2,7 @@ package com.stockers.stockers.client.controller;
 
 import com.stockers.stockers.client.domain.Client;
 import com.stockers.stockers.client.dto.ClientDto;
+import com.stockers.stockers.client.mapper.ClientMapper;
 import com.stockers.stockers.client.service.ClientService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,37 +34,22 @@ public class ClientController {
     }
     @GetMapping(path = "/{clientId}")
     @ApiOperation(value = "Busca un cliente", notes = "Devuelve un cliente segun ID")
-    public ResponseEntity<Client> getClient(@PathVariable Integer clientId){
-        return ResponseEntity.ok(clientService.findById(clientId));
+    public ResponseEntity<ClientDto> getClient(@PathVariable Integer clientId){
+        Client client = clientService.findById(clientId);
+        ClientDto clientDto = ClientMapper.modelToDto(client);
+        return ResponseEntity.ok(clientDto);
     }
 
     @PostMapping()
     @ApiOperation(value = "Crea un cliente", notes = "Crea un cliente y lo devuelve")
     public ResponseEntity<Client> createClient(@RequestBody @Valid ClientDto clientDto){
-        Client client = new Client();
-        client.setName(clientDto.getName());
-        client.setBusinessName(clientDto.getBusinessName());
-        client.setVatDeparture(clientDto.getVatDeparture());
-        client.setAddress(clientDto.getAddress());
-        client.setTelephoneNumber(clientDto.getTelephoneNumber());
-        client.setContactName(clientDto.getContactName());
-        client.setEmail(clientDto.getEmail());
-        client.setCountry(clientDto.getCountry());
+        Client client = ClientMapper.dtoToClient(clientDto);
         return ResponseEntity.ok((clientService.create(client)));
     }
     @PutMapping(path = "/{clientId}")
     @ApiOperation(value = "Actualiza un cliente", notes = "Actualiza un cliente y lo devuelve")
     public ResponseEntity<Client> updateClient(@PathVariable Integer clientId, @RequestBody @Valid ClientDto clientDto){
-        Client client = new Client();
-        client.setClientId(clientId);
-        client.setName(clientDto.getName());
-        client.setBusinessName(clientDto.getBusinessName());
-        client.setVatDeparture(clientDto.getVatDeparture());
-        client.setAddress(clientDto.getAddress());
-        client.setTelephoneNumber(clientDto.getTelephoneNumber());
-        client.setContactName(clientDto.getContactName());
-        client.setEmail(clientDto.getEmail());
-        client.setCountry(clientDto.getCountry());
+        Client client = ClientMapper.dtoToClient(clientDto);
         return ResponseEntity.ok((clientService.update(client)));
 
     }
