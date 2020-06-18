@@ -10,6 +10,7 @@ public class ClientMapper {
         clientDto.setBusinessName(client.getBusinessName());
         clientDto.setVatDeparture(client.getVatDeparture());
         clientDto.setAddress(client.getAddress());
+        clientDto.setPostalCode(client.getPostalCode());
         clientDto.setTelephoneNumber(client.getTelephoneNumber());
         clientDto.setContactName(client.getContactName());
         clientDto.setEmail(client.getEmail());
@@ -22,6 +23,7 @@ public class ClientMapper {
         client.setBusinessName(clientDto.getBusinessName());
         client.setVatDeparture(clientDto.getVatDeparture());
         client.setAddress(clientDto.getAddress());
+        client.setPostalCode(clientDto.getPostalCode());
         client.setTelephoneNumber(clientDto.getTelephoneNumber());
         client.setContactName(clientDto.getContactName());
         client.setEmail(clientDto.getEmail());

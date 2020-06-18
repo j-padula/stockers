@@ -19,6 +19,7 @@ public class Client {
     private String businessName;
     private String vatDeparture;
     private String address;
+    private String postalCode;
     private String telephoneNumber;
     private String contactName;
     private String email;

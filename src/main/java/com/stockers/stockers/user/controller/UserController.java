@@ -1,6 +1,7 @@
 package com.stockers.stockers.user.controller;
 
 import com.stockers.stockers.user.domain.User;
+import com.stockers.stockers.user.dto.PasswordDto;
 import com.stockers.stockers.user.dto.UserDto;
 import com.stockers.stockers.user.mapper.UserMapper;
 import com.stockers.stockers.user.service.UserService;
@@ -43,14 +44,19 @@ public class UserController {
     @PostMapping()
     @ApiOperation(value = "Crea un usuario", notes = "Crea un usuario y lo devuelve")
     public ResponseEntity<User> createUser(@RequestBody @Valid UserDto userDto){
-        User user = UserMapper.dtoToUser(userDto);
+        User user = UserMapper.dtoToModel(userDto);
         return ResponseEntity.ok((userService.create(user)));
     }
     @PutMapping(path = "/{userId}")
     @ApiOperation(value = "Actualiza un usuario", notes = "Actualiza un usuario y lo devuelve")
     public ResponseEntity<User> updateUser(@PathVariable Integer userId, @RequestBody @Valid UserDto userDto){
-        User user = UserMapper.dtoToUser(userDto);
+        User user = UserMapper.dtoToModel(userDto);
         return ResponseEntity.ok((userService.update(user)));
+    }
+    @PutMapping(path = "/{userId}/update_password")
+    public void updatePassword(@PathVariable Integer userId, @RequestBody @Valid PasswordDto passwordDto){
+        User user = UserMapper.passwordToUser(userId, passwordDto);
+        userService.updatePassword(user);
     }
 
     @DeleteMapping("/{ID de usuario}")

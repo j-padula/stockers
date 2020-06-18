@@ -10,9 +10,6 @@ public class ArticleMapper {
         articleDto.setArtCode(article.getArtCode());
         articleDto.setModel(article.getModel());
         articleDto.setType(article.getType());
-        articleDto.setLocation(article.getLocation());
-        articleDto.setQuantity(article.getQuantity());
-        articleDto.setManufacturingDate(article.getManufacturingDate());
         articleDto.setDescription(article.getDescription());
         articleDto.setPrice(article.getPrice());
         return articleDto;
@@ -24,9 +21,6 @@ public class ArticleMapper {
         article.setArtCode(articleDto.getArtCode());
         article.setModel(articleDto.getModel());
         article.setType(articleDto.getType());
-        article.setLocation(articleDto.getLocation());
-        article.setQuantity(articleDto.getQuantity());
-        article.setManufacturingDate(articleDto.getManufacturingDate());
         article.setDescription(articleDto.getDescription());
         article.setPrice(articleDto.getPrice());
         return article;

@@ -2,16 +2,19 @@ package com.stockers.stockers.purchase.controller;
 
 import com.stockers.stockers.article.domain.Article;
 import com.stockers.stockers.article.dto.ArticleDto;
+import com.stockers.stockers.article.service.ArticleService;
 import com.stockers.stockers.client.domain.Client;
 import com.stockers.stockers.purchase.domain.Purchase;
 import com.stockers.stockers.purchase.dto.PurchaseDto;
 import com.stockers.stockers.client.service.ClientService;
+import com.stockers.stockers.purchase.mapper.PurchaseMapper;
 import com.stockers.stockers.purchase.service.PurchaseService;
 import com.stockers.stockers.user.domain.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,10 +30,12 @@ public class PurchaseController {
     private PurchaseService purchaseService;
     private ClientService clientService;
     private Purchase purchase;
+    private ArticleService articleService;
 
-    public PurchaseController(PurchaseService purchaseService, ClientService clientService){
+    public PurchaseController(PurchaseService purchaseService, ClientService clientService, ArticleService articleService){
         this.purchaseService = purchaseService;
         this.clientService = clientService;
+        this.articleService = articleService;
     }
 
     @GetMapping()
@@ -48,45 +53,14 @@ public class PurchaseController {
     @PostMapping()
     @ApiOperation(value = "Crea un pedido", notes = "Crea un pedido y lo devuelve")
     public ResponseEntity<Purchase>  createPurchase(@RequestBody @Valid PurchaseDto purchaseDto){
-        Purchase purchase = new Purchase();
-        Client client = new Client();
-        client.setClientId(purchaseDto.getClient().getClientId());
-
-        User user = new User();
-        user.setUserId(purchaseDto.getUser().getUserId());
-        List<Article> articles = new ArrayList();
-        purchaseDto.getArticles().forEach((ArticleDto article) -> {
-            Article art = new Article();
-            art.setArticleId(article.getArticleId());
-            articles.add(art);
-        });
-        purchase.setOrderDate(purchaseDto.getOrderDate());
-        purchase.setDeliveryDate(purchaseDto.getDeliveryDate());
-        purchase.setClient(client);
-        purchase.setUser(user);
-        purchase.setArticles(articles);
+        Purchase purchase = PurchaseMapper.dtoToModel(purchaseDto);
         return ResponseEntity.ok(purchaseService.create(purchase));
     }
 
     @PutMapping(path = "/{purchaseId}")
     @ApiOperation(value = "Actualiza un pedido", notes = "Actualiza un pedido y lo devuelve")
     public ResponseEntity<Purchase> updatePurchase(@PathVariable Integer purchaseId, @RequestBody @Valid PurchaseDto purchaseDto){
-        Purchase purchase = new Purchase();
-      //  Client client = this.clientService.findById(purchaseDto.getClient());
-        Client client = new Client();
-        client.setClientId(purchaseDto.getClient().getClientId());
-        purchase.setPurchaseId(purchaseId);
-        purchase.setOrderDate(purchaseDto.getOrderDate());
-        purchase.setDeliveryDate(purchaseDto.getDeliveryDate());
-        purchase.setClient(client);
-        User user = new User();
-        user.setUserId(purchaseDto.getUser().getUserId());
-        List<Article> articles = null;
-        purchaseDto.getArticles().forEach((ArticleDto article) -> {
-            Article art = new Article();
-            art.setArticleId(article.getArticleId());
-            articles.add(art);
-        });
+        Purchase purchase = PurchaseMapper.dtoToModel(purchaseDto);
         return ResponseEntity.ok(purchaseService.update(purchase));
     }
 
@@ -100,4 +74,27 @@ public class PurchaseController {
             this.purchaseService.delete(purchase);
         }
     }
+    /*@GetMapping(path = "/{purchaseId}/{articleId]")
+    @ApiOperation(value = "Busca un pedido y un articulo por ID", notes = "Devuelve un pedido y un articulo según su ID")
+    public ResponseEntity>(@PathVariable Integer purchaseId, Integer articleId){
+        Purchase purchase = this.purchaseService.findById(purchaseId);
+       // Article article = this.articleService.findById(articleId);
+        if  (purchase != null) {
+            this.articleService.findById(articleId);
+        }
+            return ResponseEntity.ok(purchaseService.findById(purchaseId));
+            return ResponseEntity.ok(articleService.findById(articleId));
+
+
+    }
+
+     */
+
+
+    /*public ResponseEntity<Purchase>getPurchaseAndArticle(@PathVariable Integer purchaseId) {
+        return ResponseEntity.ok(purchaseService.findById(purchaseId));
+    }
+    public ResponseEntity<Article>getPurchaseAndArticle2(@PathVariable Integer articleId){
+        return ResponseEntity.ok(articleService.findById(articleId));
+    }*/
 }

@@ -29,11 +29,24 @@ public class Purchase {
     @ManyToOne
     @JoinColumn(name = "clientId")
     private Client client;
+    /*
     @ManyToMany(targetEntity = Article.class)
     @JoinColumn(name = "articleId")
     private List<Article> articles;
+
+     */
+
+
+
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
+
+    private String state;
+
+
+    public Purchase(){
+
+    }
 }

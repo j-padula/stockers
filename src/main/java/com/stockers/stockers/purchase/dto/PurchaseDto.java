@@ -14,7 +14,9 @@ public class PurchaseDto {
     private Date orderDate;
     private Date deliveryDate;
     private ClientDto client;
-    private List<ArticleDto> articles;
+    //private List<ArticleDto> articles;
     private UserDto user;
+    private String state;
+
 
 }

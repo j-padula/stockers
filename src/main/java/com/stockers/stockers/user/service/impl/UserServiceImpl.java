@@ -33,6 +33,12 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.save(user);
     }
 
+    @Transactional
+    @Override
+    public void updatePassword(User user){
+        this.userRepository.updatePassword(user.getPassword(), user.getUserId());
+    }
+
     //Metodo para eliminar usuario
     @Transactional
     @Override

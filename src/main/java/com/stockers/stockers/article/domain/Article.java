@@ -21,10 +21,7 @@ public class Article {
     private String name;
     private String artCode;
     private String model;
-    private String type;
-    private String location;
-    private Integer quantity;
-    private String manufacturingDate;
+    private String type; //tipo de articulo, mesa, vitrina, armario, etc
     private String description;
     private Double price;
 
