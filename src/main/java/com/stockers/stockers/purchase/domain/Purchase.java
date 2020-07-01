@@ -19,24 +19,24 @@ public class Purchase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer purchaseId;
 
-
-    private Integer purchaseId ;
     @Temporal(TemporalType.DATE)
     private Date orderDate;
+
     @Temporal(TemporalType.DATE)
     private Date deliveryDate;
+
     @ManyToOne
     @JoinColumn(name = "clientId")
     private Client client;
-    /*
-    @ManyToMany(targetEntity = Article.class)
+
+
+    /*@ManyToMany(targetEntity = Article.class)
     @JoinColumn(name = "articleId")
     private List<Article> articles;
 
      */
-
-
 
     @JsonManagedReference
     @ManyToOne

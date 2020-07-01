@@ -35,8 +35,9 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void updatePassword(User user){
-        this.userRepository.updatePassword(user.getPassword(), user.getUserId());
+    public int updatePassword(User user){
+        int modify = this.userRepository.updatePassword(user.getPassword(), user.getUserId());
+        return modify;
     }
 
     //Metodo para eliminar usuario

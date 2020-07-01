@@ -13,11 +13,11 @@ import java.util.Set;
 @Entity
 @Table(name = "Article")
 public class Article {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-
     private Integer articleId;
+
     private String name;
     private String artCode;
     private String model;

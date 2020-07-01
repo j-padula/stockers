@@ -3,6 +3,7 @@ package com.stockers.stockers.user.controller;
 import com.stockers.stockers.user.domain.User;
 import com.stockers.stockers.user.dto.PasswordDto;
 import com.stockers.stockers.user.dto.UserDto;
+import com.stockers.stockers.user.dto.response.PasswordResponseDto;
 import com.stockers.stockers.user.mapper.UserMapper;
 import com.stockers.stockers.user.service.UserService;
 import io.swagger.annotations.Api;
@@ -50,13 +51,24 @@ public class UserController {
     @PutMapping(path = "/{userId}")
     @ApiOperation(value = "Actualiza un usuario", notes = "Actualiza un usuario y lo devuelve")
     public ResponseEntity<User> updateUser(@PathVariable Integer userId, @RequestBody @Valid UserDto userDto){
-        User user = UserMapper.dtoToModel(userDto);
+        User user = UserMapper.updateToUser(userDto);
         return ResponseEntity.ok((userService.update(user)));
     }
     @PutMapping(path = "/{userId}/update_password")
-    public void updatePassword(@PathVariable Integer userId, @RequestBody @Valid PasswordDto passwordDto){
+    @ApiOperation(value ="Actualiza la contraseña", notes = "Actualiza password")
+    public ResponseEntity<PasswordResponseDto> updatePassword(@PathVariable Integer userId, @RequestBody @Valid PasswordDto passwordDto){
         User user = UserMapper.passwordToUser(userId, passwordDto);
-        userService.updatePassword(user);
+        Integer code = 401;
+        PasswordResponseDto response = new PasswordResponseDto();
+        if (userService.updatePassword(user) > 0){
+            code = 200;
+            response.setMessage("Contraseña actualizada correctamente");
+        } else {
+            response.setMessage("Error al actualizar");
+        }
+        response.setCode(code);
+        return ResponseEntity.status(code).body(response);
+
     }
 
     @DeleteMapping("/{ID de usuario}")

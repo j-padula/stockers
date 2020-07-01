@@ -5,7 +5,7 @@ import com.stockers.stockers.user.dto.PasswordDto;
 import com.stockers.stockers.user.dto.UserDto;
 
 public class UserMapper {
-    public static UserDto modelToDto(User user){
+    public static UserDto modelToDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setUserId(user.getUserId());
         userDto.setName(user.getName());
@@ -14,7 +14,8 @@ public class UserMapper {
         userDto.setRoles(user.getRoles());
         return userDto;
     }
-    public static User dtoToModel(UserDto userDto){
+
+    public static User dtoToModel(UserDto userDto) {
         User user = new User();
         user.setUserId(userDto.getUserId());
         user.setName(userDto.getName());
@@ -24,10 +25,23 @@ public class UserMapper {
         user.setRoles(userDto.getRoles());
         return user;
     }
-    public static User  passwordToUser (Integer userId, PasswordDto passwordDto){
+
+    public static User passwordToUser(Integer userId, PasswordDto passwordDto) {
         User user = new User();
         user.setUserId(userId);
         user.setPassword(passwordDto.getPassword());
         return user;
     }
+
+    public static User updateToUser(UserDto userDto) {
+        User user = new User();
+        user.setUserId(userDto.getUserId());
+        user.setName(userDto.getName());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+        user.setUsername(userDto.getUsername());
+        user.setRoles(userDto.getRoles());
+        return user;
+    }
+
 }
